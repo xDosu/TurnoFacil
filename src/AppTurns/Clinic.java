@@ -2,6 +2,8 @@ package AppTurns;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Filters.*;
 import Users.*;
 
 public class Clinic {
@@ -55,4 +57,21 @@ public class Clinic {
 		}
 	}
 	
+	public ArrayList<Medic> getMedics(){
+		ArrayList<Medic> medics = new ArrayList<Medic>();
+		for(User u : users) {
+			if(u instanceof Medic)
+				medics.add((Medic) u);
+		}
+		return medics;
+	}
+	
+	public ArrayList<Medic> findMedics(Filter filter) {
+		ArrayList<Medic> medicsFiltered = getMedics();
+		for(Medic m : getMedics()) {
+			if(filter.find(m))
+				medicsFiltered.add(m);
+		}
+		return medicsFiltered;
+	}
 }

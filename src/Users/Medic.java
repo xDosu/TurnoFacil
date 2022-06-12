@@ -1,10 +1,33 @@
 package Users;
 
-public class Medic extends UserWithTurns{
-	public Medic(String user, String password) {super(user, password);}
+import java.util.ArrayList;
 
+public class Medic extends UserWithTurns{
+	private String name;
+	private String surname;
+	private String specialty;
+	private ArrayList<String> prepaidsHealth;
+	
+	public Medic(String user, String password, String specialty, String name, String surname) {
+		super(user, password);
+		this.specialty = specialty;
+		this.prepaidsHealth = null;
+		this.name = name;
+		this.surname = surname;
+	}
+
+	public String getName() {return name;}
+
+	public String getSurname() {return surname;}
+
+	public String getSpecialty() {return specialty;}
+	
+	public void addPrepaid(String p) {prepaidsHealth.add(p);}
+	
+	public boolean containsPrepaid(String prepaid) {return prepaidsHealth.contains(prepaid);}
+	
 	@Override
 	public void printMenu() {
-		// TODO Auto-generated method stub
+		//Do something
 	}
 }
