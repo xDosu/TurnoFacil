@@ -56,8 +56,3 @@ public class Clinic {
 	}
 	
 }
-
-			
-	
-		
-

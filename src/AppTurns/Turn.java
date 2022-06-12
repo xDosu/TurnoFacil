@@ -17,21 +17,16 @@ public class Turn {
 	}
 
 	public LocalDate getDate() {return date;}
+		
+	public void asingPatient(Patient patient) {this.patient = patient;};
 	
-	public boolean acceptPrepaid(String prepaidHealth) {
-		return medic.acceptPrepaid(prepaidHealth);
-	}
+	public void erasePatient() {patient = null;};
 	
-	public void asingPatient(Patient patient) {};
-	
-	public void erasePatient() {};
-	
-	public boolean isFree() {return false;};
+	public boolean isFree() {return (patient == null);};
 	
 	@Override
 	public String toString() {
-		return " Fecha : " + date.toString() + " | Medico : " + medic.getUser();
-		
+		return " Fecha : " + date.toString() + " | Medico : " + medic.getUser();	
 	}
 	
 	public boolean expire() {return false;}

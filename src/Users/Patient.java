@@ -9,15 +9,14 @@ public class Patient extends UserWithTurns{
 	
 	/*
 	Este metodo asigna un paciente a un turno para poder ocuparlo.
-	Luego lo anade a su lista de turnos personales, para por ultimo devolverlo para actualizarlo en el objecto 'Clinic'.
+	Luego lo anade a su lista de turnos personales.
 	@author Tomas Fernandez
 	@date 23/05/2022
 	@params Turn : Recibe un turno como parametro
 	*/
-	public Turn requestTurn(Turn turn) {
+	public void requestTurn(Turn turn) {
 		turn.asingPatient(this);
 		super.addTurn(turn);
-		return turn;
 	}
 	
 	/*
@@ -27,12 +26,12 @@ public class Patient extends UserWithTurns{
 	@date 23/05/2022
 	@params Turn : Recibe un turno como parametro
 	*/
-	public Turn cancelTurn(Turn turn) {
-		turn.erasePatient();
-		this.removeTurn(turn);
-		return turn;
-	}
 	
+	public void cancelTurn(Turn turn) {
+		this.removeTurn(turn);
+		turn.erasePatient();
+	}
+		
 	@Override
 	public String toString() {
 		return "";
@@ -46,5 +45,5 @@ public class Patient extends UserWithTurns{
 				"3. Mostrar mis turnos" + "\n" + 
 				"0. Cerrar sesion" + "\n" + 
 				"Eliga una opcion : ");
-	}	
+	}
 }

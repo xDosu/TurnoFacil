@@ -17,6 +17,6 @@ public abstract class User {
 	public void setUser(String user) {this.user = user;}
 
 	public void setPassword(String password) {this.password = password;}
-
-	public abstract void login();
+	
+	public abstract void printMenu();
 }

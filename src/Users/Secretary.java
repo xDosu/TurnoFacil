@@ -7,12 +7,13 @@ public class Secretary extends User{
 	private ArrayList<Medic> medics = new ArrayList<Medic>();
 	
 	public Secretary(String user, String password) {super(user, password);}
-	
-	@Override
-	public void login() {
-	}
-	
+		
 	public void cancelTurn() {};
 	public void editTurn() {};
-	public void listTurns() {};
+	public void listTurns() {}
+
+	@Override
+	public void printMenu() {
+		// TODO Auto-generated method stub
+	};
 }
