@@ -20,7 +20,6 @@ public class Patient extends UserWithTurns{
 		return turn;
 	}
 	
-	
 	/*
 	Este metodo cancela el turno de un paciente.
 	Lo elimina de su lista de turnos, para por ultimo devolverlo para actualizarlo en el objecto 'Clinic'.
@@ -30,12 +29,22 @@ public class Patient extends UserWithTurns{
 	*/
 	public Turn cancelTurn(Turn turn) {
 		turn.erasePatient();
-		prepaidsHealth.remove(turn);
+		this.removeTurn(turn);
 		return turn;
 	}
 	
 	@Override
 	public String toString() {
 		return "";
+	}
+
+	@Override
+	public void printMenu() {
+		System.out.println( "Menu Clinica		User : " + this.getUser() + "\n" +
+				"1. Sacar turno" + "\n" +
+				"2. Cancelar turno" + "\n" +
+				"3. Mostrar mis turnos" + "\n" + 
+				"0. Cerrar sesion" + "\n" + 
+				"Eliga una opcion : ");
 	}	
 }
