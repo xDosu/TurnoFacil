@@ -26,7 +26,7 @@ public class Turn {
 	
 	@Override
 	public String toString() {
-		return " Fecha : " + date.toString() + " | Medico : " + medic.getUser();	
+		return " Fecha : " + date.toString() + " | Medico : " + medic.toString() + " | Libre : " + isFree();	
 	}
 	
 	public boolean expire() {return false;}

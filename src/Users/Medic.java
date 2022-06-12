@@ -30,4 +30,10 @@ public class Medic extends UserWithTurns{
 	public void printMenu() {
 		//Do something
 	}
+	
+	@Override
+	public String toString() {
+		String out = "Nombre : " + name + " " + surname;
+		return out;
+	}
 }

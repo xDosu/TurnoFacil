@@ -33,7 +33,10 @@ public class Clinic {
 				break;
 			}
 		}
-		openSession(session);
+		if(session != null) 
+			openSession(session);
+		else
+			System.out.println("Credenciales incorrectas");
 	}
 	
 	public void openSession(User session) {
@@ -48,7 +51,7 @@ public class Clinic {
 			case 2 : // Cancelar turno
 			
 			case 3 : // Mostrar mis turnos
-			
+				((UserWithTurns) session).listTurns();
 			case 0 : // Cerrar sesion
 				session = null;
 				break;
@@ -67,7 +70,7 @@ public class Clinic {
 	}
 	
 	public ArrayList<Medic> findMedics(Filter filter) {
-		ArrayList<Medic> medicsFiltered = getMedics();
+		ArrayList<Medic> medicsFiltered = new ArrayList<Medic>();
 		for(Medic m : getMedics()) {
 			if(filter.find(m))
 				medicsFiltered.add(m);
