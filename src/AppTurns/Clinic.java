@@ -44,7 +44,24 @@ public class Clinic {
 			option = reader.nextInt();
 			switch(option) {
 			case 1 : // Sacar turno
-				
+				System.out.println("Menu 'Sacar Turnos'");
+				Scanner reader2 = new Scanner(System.in);
+				int option2 = -1;
+				while (session != null) {
+					session.printMenu();
+					option2 = reader.nextInt();
+					switch(option) {
+					case 1 : //Caso 1 "Mostrar Lista de médicos"
+						System.out.println("Lista de Medicos");
+						System.out.println(this.getMedics());
+					case 2 : //Caso 2 "Mostrar Lista de médicos por obra social
+						System.out.println("Lista de Medicos por Obra Social");
+						//System.out.println(this.findMedics(filterPrepaid));
+					case 3 : //Caso 3 "Mostrar Lista de médicos por especialidad
+						System.out.println("Lista de Medicos por Especialidad");
+						//System.out.println(this.findMedics(filterSpecialty));
+					}
+				}
 			case 2 : // Cancelar turno
 			
 			case 3 : // Mostrar mis turnos
