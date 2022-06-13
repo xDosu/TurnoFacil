@@ -30,8 +30,10 @@ public class Patient extends UserWithTurns{
 	*/
 	
 	public void cancelTurn(Turn turn) {
-		this.removeTurn(turn);
-		turn.erasePatient();
+		if(turn != null) {
+			turn.erasePatient();
+			this.removeTurn(turn);
+		}
 	}
 		
 	@Override
@@ -39,6 +41,9 @@ public class Patient extends UserWithTurns{
 		return "";
 	}
 
+	
+	
+	
 	@Override
 	public void printMenu() {
 		System.out.println( "Menu Clinica		User : " + this.getUser() + "\n" +

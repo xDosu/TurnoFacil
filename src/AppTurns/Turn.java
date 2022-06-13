@@ -3,20 +3,21 @@ package AppTurns;
 import java.time.LocalDate;
 import Users.Medic;
 import Users.Patient;
+import Utilidad.FechaYHora;
 
 public class Turn {
-	private LocalDate date;
+	private FechaYHora date;
 	private Medic medic;
 	private Patient patient;
 	
-	public Turn(LocalDate date, Medic medic) {
+	public Turn(FechaYHora date, Medic medic) {
 		super();
 		this.date = date;
 		this.medic = medic;
 		this.patient = null;
 	}
 
-	public LocalDate getDate() {return date;}
+	public FechaYHora getDate() {return date;}
 		
 	public void asingPatient(Patient patient) {this.patient = patient;};
 	

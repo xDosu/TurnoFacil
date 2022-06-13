@@ -1,5 +1,6 @@
 package AppTurns;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,7 +81,7 @@ public class Clinic {
 		int i = 0;
 		for(Medic m : medics) {
 			i++;
-			out += i + ". " + m.toString() + "\n";
+			out += i + ". " + m.toString() +"\n";
 		}
 		System.out.println(out);
 		System.out.println("Ingrese una opcion : ");
@@ -107,22 +108,47 @@ public class Clinic {
 		return null;
 	}
 	
+	private void cancelTurn(User session) {
+		((UserWithTurns) session).listTurns();
+		System.out.println("Elija un turno para cancelar");
+		Scanner reader2 = new Scanner(System.in);
+		int turn  = reader2.nextInt();
+		System.out.println(turn);
+		
+		LocalDateTime now = LocalDateTime.now();
+		
+		if(((UserWithTurns) session).haveTurns()) {
+			Turn aux = ((UserWithTurns) session).getTurn(turn-1);
+			int Diferencia = aux.getDate().getHora() - now.getHour();  
+				if(Diferencia > 1)
+					((Patient) session).cancelTurn(aux);
+				else 
+					System.out.println("Falta menos de una hora para tu turno, ya no puedes cancelar");
+		}
+	}
+	
+	
 	public void openSession(User session) {
 		Scanner reader = new Scanner(System.in);
 		int option = -1;
 		while (session != null) {
 			session.printMenu();
 			option = reader.nextInt();
-			System.out.print("\\033[H\\033[2J");
-			System.out.flush();
 			switch(option) {
 			case 1 : // Sacar turno
 				requestTurnOption((Patient) session);
 				break;
 			case 2 : // Cancelar turno
+				if( ((UserWithTurns)session).haveTurns() )
+					cancelTurn(session);
+				else
+					System.out.println("No tiene ningun turno el cual cancelar");
 				break;
 			case 3 : // Mostrar mis turnos
-				((UserWithTurns) session).listTurns();
+				if( ((UserWithTurns)session).haveTurns() )
+					((UserWithTurns) session).listTurns();
+				else
+					System.out.println("No tiene ningun turno el cual cancelar");
 				break;
 			case 0 : // Cerrar sesion
 				session = null;
@@ -149,4 +175,7 @@ public class Clinic {
 		}
 		return medicsFiltered;
 	}
+	
+	
+	
 }
