@@ -1,10 +1,12 @@
 package AppTurns;
 
-import java.time.LocalDate;
+
 import java.util.Scanner;
 
-import Filters.*;
+
+
 import Users.*;
+import Utilidad.FechaYHora;
 
 public class Main {
 
@@ -38,32 +40,27 @@ public class Main {
 		clinica.addUser(medico6);
 		
 		/* Creacion Turnos */
-		
-		// Medico 1 - Daniel Suarez
-		medico1.addTurn(new Turn(LocalDate.now(),medico1));
-		medico1.addTurn(new Turn(LocalDate.now(),medico1));
-		medico1.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 2 - Luis Contreras
-		medico2.addTurn(new Turn(LocalDate.now(),medico1));
-		medico2.addTurn(new Turn(LocalDate.now(),medico1));
-		medico2.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 3 - Agustin Perazzi
-		medico3.addTurn(new Turn(LocalDate.now(),medico1));
-		medico3.addTurn(new Turn(LocalDate.now(),medico1));
-		medico3.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 4 - Luis Suarez
-		medico4.addTurn(new Turn(LocalDate.now(),medico1));
-		medico4.addTurn(new Turn(LocalDate.now(),medico1));
-		medico4.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 5 - Mauro Lombardo
-		medico5.addTurn(new Turn(LocalDate.now(),medico1));
-		medico5.addTurn(new Turn(LocalDate.now(),medico1));
-		medico5.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 6 - Martin Michel
-		medico6.addTurn(new Turn(LocalDate.now(),medico1));
-		medico6.addTurn(new Turn(LocalDate.now(),medico1));
-		medico6.addTurn(new Turn(LocalDate.now(),medico1));
-						
+		//Se crearan turnos al azar
+		for (int i=0;i<24;i++) {
+			int selectMed = (int)(Math.random()*(6-1+1)+1);
+			int randH = (int)(Math.random()*(16-8+1)+8);
+			int randD = 14;//(int)(Math.random()*(31-1+1)+1);
+			switch(selectMed) {
+			//randD = 13; //si se quiere dejar fijo
+			case 1 : medico1.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico1));
+				break;
+			case 2 : medico2.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico2));
+				break;
+			case 3 : medico3.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico3));
+				break;
+			case 4 : medico4.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico4));
+				break;
+			case 5 : medico5.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico5));
+				break;
+			case 6 : medico6.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico6));
+				break;
+			}
+		}	
 		/* Login */
 		Scanner reader = new Scanner(System.in);
 		String user;
@@ -73,9 +70,9 @@ public class Main {
 		user = reader.next();
 		System.out.println("Contrasenia : ");
 		pass = reader.next();
-		
 		clinica.login(user, pass);
 		
 		/* Debug */
+		reader.close();
 	}
 }

@@ -14,6 +14,6 @@ public class AndFilter implements Filter{
 
 	@Override
 	public boolean find(Medic medic) {
-		return filter1.find(medic) & filter1.find(medic);
+		return filter1.find(medic) & filter2.find(medic);
 	}
 }

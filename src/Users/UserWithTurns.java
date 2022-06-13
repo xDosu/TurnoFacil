@@ -12,9 +12,32 @@ public abstract class UserWithTurns extends User{
 		turns = new ArrayList<Turn>();
 	}
 	
-	public void addTurn(Turn t) {turns.add(t);}
+	public void addTurn(Turn t) {
+		boolean encontre = false;
+		if(!turns.isEmpty()) {
+			int i=0;
+			while(i<turns.size() && !encontre)
+				if(!turns.get(i).getDate().equals(t.getDate())) //verifica que toda fecha almacenada sea diferente a la por almacenar
+					i++;
+				else 
+					encontre =true;
+		}
+		
+		if(!encontre)
+			turns.add(t);
+		}
 	public void removeTurn(Turn t) {turns.remove(t);}
-	public Turn getTurn(int index) {return turns.get(index);}
+	public Turn getTurn(int index) {
+		try {
+		return turns.get(index);
+		}catch (Exception e) {
+		return null;
+		}
+	}	
+	public boolean haveTurns() {
+		return !turns.isEmpty();
+	}
+	
 
 	public void listTurns() {
 		String info = "";
@@ -29,7 +52,7 @@ public abstract class UserWithTurns extends User{
 	public ArrayList<Turn> getFreeTurns() {
 		ArrayList<Turn> freeTurns = new ArrayList<Turn>();
 		for (Turn t : turns) {
-			if(t.isFree())
+			if(t.isFree() && !t.expire())
 				freeTurns.add(t);
 		}
 		return freeTurns;
