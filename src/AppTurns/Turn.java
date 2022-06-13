@@ -1,6 +1,8 @@
 package AppTurns;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import Users.Medic;
 import Users.Patient;
 import Utilidad.FechaYHora;
@@ -30,5 +32,12 @@ public class Turn {
 		return " Fecha : " + date.toString() + " | Medico : " + medic.toString() + " | Libre : " + isFree();	
 	}
 	
-	public boolean expire() {return false;}
+	public boolean expire() {
+		LocalDateTime now = LocalDateTime.now();
+		if(this.getDate().getHora() >= now.getHour() && this.getDate().getDia() >= now.getDayOfMonth() && this.getDate().getMes() >= now.getMonthValue() && this.getDate().getAnio() >= now.getYear()) {
+			return false;
+		}
+		else
+			return true;
+		}
 }
