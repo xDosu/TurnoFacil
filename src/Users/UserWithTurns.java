@@ -25,4 +25,13 @@ public abstract class UserWithTurns extends User{
 		}
 		System.out.println(info);
 	}
+	
+	public ArrayList<Turn> getFreeTurns() {
+		ArrayList<Turn> freeTurns = new ArrayList<Turn>();
+		for (Turn t : turns) {
+			if(t.isFree())
+				freeTurns.add(t);
+		}
+		return freeTurns;
+	}
 }

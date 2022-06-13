@@ -39,36 +39,91 @@ public class Clinic {
 			System.out.println("Credenciales incorrectas");
 	}
 	
+	private void requestTurnOption(Patient patient) {
+		Scanner reader = new Scanner(System.in);
+		Medic medic = null;
+		Turn turn = null;
+		System.out.println("Menu 'Sacar Turnos'");
+		int option = -1;
+		System.out.println("1) Mostrar todos los medicos");
+		System.out.println("2) Filtrar por obra social");
+		System.out.println("3) Filtrar por especialidad");
+		option = reader.nextInt();
+		switch(option) {
+		case 1 : //Caso 1 "Mostrar Lista de médicos"
+			System.out.println("Lista de Medicos");
+			medic = chooseMedic(this.getMedics());
+			break;
+		case 2 : //Caso 2 "Mostrar Lista de médicos por obra social
+			System.out.println("Ingrese su obra social : ");
+			medic = chooseMedic((this.findMedics(new FilterPrepaid(reader.next()))));
+			break;
+		case 3 : //Caso 3 "Mostrar Lista de médicos por especialidad
+			System.out.println("Ingrese la especialidad del medico : ");
+			medic = chooseMedic(this.findMedics(new FilterSpecialty(reader.next())));
+			break;
+		}
+		
+		if(medic != null) {
+			turn = chooseTurn(medic);
+			if(turn != null)
+				patient.requestTurn(turn);
+			else
+				System.out.println("No se selecciono una opcion valida");
+		}else
+			System.out.println("No se selecciono una opcion valida");
+	}
+	
+	private Medic chooseMedic(ArrayList<Medic> medics) {
+		String out = "";
+		Scanner reader = new Scanner(System.in);
+		int i = 0;
+		for(Medic m : medics) {
+			i++;
+			out += i + ". " + m.toString() + "\n";
+		}
+		System.out.println(out);
+		System.out.println("Ingrese una opcion : ");
+		int option = reader.nextInt();
+		if(option >= 1 & option <= medics.size())
+			return medics.get(option - 1);
+		return null;
+	}
+	
+	private Turn chooseTurn(UserWithTurns user) {
+		String out = "";
+		Scanner reader = new Scanner(System.in);
+		int i = 0;
+		for(Turn t : user.getFreeTurns()) {
+			i++;
+			out += i + ". " + t.toString() + "\n";
+		}
+		System.out.println(out);
+		System.out.println("Ingrese una opcion : ");
+		int option = reader.nextInt();
+		if(option >= 1 & option <= user.getFreeTurns().size()) {
+			return user.getFreeTurns().get(option - 1);
+		}
+		return null;
+	}
+	
 	public void openSession(User session) {
 		Scanner reader = new Scanner(System.in);
 		int option = -1;
 		while (session != null) {
 			session.printMenu();
 			option = reader.nextInt();
+			System.out.print("\\033[H\\033[2J");
+			System.out.flush();
 			switch(option) {
 			case 1 : // Sacar turno
-				System.out.println("Menu 'Sacar Turnos'");
-				Scanner reader2 = new Scanner(System.in);
-				int option2 = -1;
-				while (session != null) {
-					session.printMenu();
-					option2 = reader.nextInt();
-					switch(option) {
-					case 1 : //Caso 1 "Mostrar Lista de médicos"
-						System.out.println("Lista de Medicos");
-						System.out.println(this.getMedics());
-					case 2 : //Caso 2 "Mostrar Lista de médicos por obra social
-						System.out.println("Lista de Medicos por Obra Social");
-						//System.out.println(this.findMedics(filterPrepaid));
-					case 3 : //Caso 3 "Mostrar Lista de médicos por especialidad
-						System.out.println("Lista de Medicos por Especialidad");
-						//System.out.println(this.findMedics(filterSpecialty));
-					}
-				}
+				requestTurnOption((Patient) session);
+				break;
 			case 2 : // Cancelar turno
-			
+				break;
 			case 3 : // Mostrar mis turnos
 				((UserWithTurns) session).listTurns();
+				break;
 			case 0 : // Cerrar sesion
 				session = null;
 				break;

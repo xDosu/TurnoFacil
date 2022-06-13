@@ -15,8 +15,10 @@ public class Patient extends UserWithTurns{
 	@params Turn : Recibe un turno como parametro
 	*/
 	public void requestTurn(Turn turn) {
-		turn.asingPatient(this);
-		super.addTurn(turn);
+		if(turn.isFree()) {
+			turn.asingPatient(this);
+			super.addTurn(turn);
+		}
 	}
 	
 	/*

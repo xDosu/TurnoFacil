@@ -11,7 +11,7 @@ public class Medic extends UserWithTurns{
 	public Medic(String user, String password, String specialty, String name, String surname) {
 		super(user, password);
 		this.specialty = specialty;
-		this.prepaidsHealth = null;
+		this.prepaidsHealth = new ArrayList<String>();
 		this.name = name;
 		this.surname = surname;
 	}
@@ -33,7 +33,7 @@ public class Medic extends UserWithTurns{
 	
 	@Override
 	public String toString() {
-		String out = "Nombre : " + name + " " + surname;
+		String out = name + " " + surname;
 		return out;
 	}
 }
