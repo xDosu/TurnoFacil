@@ -1,6 +1,5 @@
 package AppTurns;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import Users.Medic;

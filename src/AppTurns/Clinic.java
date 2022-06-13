@@ -47,6 +47,7 @@ public class Clinic {
 	}
 
 	private void requestTurnOption(Patient patient) {
+		clearScreen();
 		Scanner reader = new Scanner(System.in);
 		Medic medic = null;
 		Turn turn = null;
@@ -77,11 +78,13 @@ public class Clinic {
 				patient.requestTurn(turn);
 		} else
 			System.out.println("No se selecciono una opcion valida");
+		//;
 	}
 
 	private Medic chooseMedic(ArrayList<Medic> medics) {
 		String out = "";
 		Scanner reader = new Scanner(System.in);
+		clearScreen();
 		int i = 0;
 		for (Medic m : medics) {
 			i++;
@@ -90,6 +93,7 @@ public class Clinic {
 		System.out.println(out);
 		System.out.println("Ingrese una opcion : ");
 		int option = reader.nextInt();
+		//;
 		if (option >= 1 & option <= medics.size())
 			return medics.get(option - 1);
 		return null;
@@ -98,6 +102,7 @@ public class Clinic {
 	private Turn chooseTurn(UserWithTurns user) {
 		String out = "";
 		Scanner reader = new Scanner(System.in);
+		clearScreen();
 		int i = 0;
 		if(!user.getFreeTurns().isEmpty()) {
 			for (Turn t : user.getFreeTurns()) {
@@ -107,6 +112,7 @@ public class Clinic {
 			System.out.println(out);
 			System.out.println("Ingrese una opcion : ");
 			int option = reader.nextInt();
+			//;
 			if (option >= 1 & option <= user.getFreeTurns().size()) {
 				return user.getFreeTurns().get(option - 1);
 			}
@@ -116,6 +122,7 @@ public class Clinic {
 	}
 
 	private void cancelTurn(User session) {
+		clearScreen();
 		((UserWithTurns) session).listTurns();
 		System.out.println("Elija un turno para cancelar");
 		Scanner reader2 = new Scanner(System.in);
@@ -128,8 +135,11 @@ public class Clinic {
 			Turn aux = ((UserWithTurns) session).getTurn(turn - 1);
 
 			int Diferencia = aux.getDate().getHora() - now.getHour();
-			if (Diferencia > 1)
+			if (aux.getDate().getDia() > now.getDayOfMonth() && aux.getDate().getMes() >= now.getMonthValue() && aux.getDate().getAnio() >= now.getYear()) 
 				((Patient) session).cancelTurn(aux);
+			else if(Diferencia > 1) {
+				((Patient) session).cancelTurn(aux);
+			}
 			else
 				System.out.println("Falta menos de una hora para tu turno, ya no puedes cancelar");
 		}
@@ -143,25 +153,32 @@ public class Clinic {
 			option = reader.nextInt();
 			switch (option) {
 			case 1: // Sacar turno
+				if(!((Patient) session).cargoDatosPersonales()) {
+					((Patient) session).cargarDatos();
+				}
 				requestTurnOption((Patient) session);
+				clearScreen();
 				break;
 			case 2: // Cancelar turno
 				if (((UserWithTurns) session).haveTurns())
 					cancelTurn(session);
 				else
 					System.out.println("No tiene ningun turno el cual cancelar");
+				clearScreen();
 				break;
 			case 3: // Mostrar mis turnos
 				if (((UserWithTurns) session).haveTurns())
 					((UserWithTurns) session).listTurns();
 				else
 					System.out.println("No tiene ningun turno el cual cancelar");
+				clearScreen();
 				break;
 			case 0: // Cerrar sesion
 				session = null;
 				break;
 			}
 			System.out.println("----------------------------");
+			//;
 		}
 	}
 
@@ -181,6 +198,10 @@ public class Clinic {
 				medicsFiltered.add(m);
 		}
 		return medicsFiltered;
+	}
+	public static void clearScreen() {
+		System.out.println("----------------");
+		System.out.flush();
 	}
 
 }

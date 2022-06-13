@@ -1,12 +1,10 @@
 package AppTurns;
 
-import java.util.Random;
 
 import java.util.Scanner;
 
 
 
-import Filters.*;
 import Users.*;
 import Utilidad.FechaYHora;
 
@@ -62,32 +60,7 @@ public class Main {
 			case 6 : medico6.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico6));
 				break;
 			}
-		}/*
-		// Medico 1 - Daniel Suarez
-		medico1.addTurn(new Turn(new FechaYHora(2022,06,13,rand),medico1));
-		medico1.addTurn(new Turn(LocalDate.now(),medico1));
-		medico1.addTurn(new Turn(LocalDate.now(),medico1));
-		// Medico 2 - Luis Contreras
-		medico2.addTurn(new Turn(LocalDate.now(),medico2));
-		medico2.addTurn(new Turn(LocalDate.now(),medico2));
-		medico2.addTurn(new Turn(LocalDate.now(),medico2));
-		// Medico 3 - Agustin Perazzi
-		medico3.addTurn(new Turn(LocalDate.now(),medico3));
-		medico3.addTurn(new Turn(LocalDate.now(),medico3));
-		medico3.addTurn(new Turn(LocalDate.now(),medico3));
-		// Medico 4 - Luis Suarez
-		medico4.addTurn(new Turn(LocalDate.now(),medico4));
-		medico4.addTurn(new Turn(LocalDate.now(),medico4));
-		medico4.addTurn(new Turn(LocalDate.now(),medico4));
-		// Medico 5 - Mauro Lombardo
-		medico5.addTurn(new Turn(LocalDate.now(),medico5));
-		medico5.addTurn(new Turn(LocalDate.now(),medico5));
-		medico5.addTurn(new Turn(LocalDate.now(),medico5));
-		// Medico 6 - Martin Michel
-		medico6.addTurn(new Turn(LocalDate.now(),medico6));
-		medico6.addTurn(new Turn(LocalDate.now(),medico6));
-		medico6.addTurn(new Turn(LocalDate.now(),medico6));
-						
+		}	
 		/* Login */
 		Scanner reader = new Scanner(System.in);
 		String user;
@@ -97,14 +70,9 @@ public class Main {
 		user = reader.next();
 		System.out.println("Contrasenia : ");
 		pass = reader.next();
-		ClearScreen();
 		clinica.login(user, pass);
 		
 		/* Debug */
-	}
-	
-	public static void ClearScreen() {
-		for(int i=0;i<25;i++)
-			System.out.println("");
+		reader.close();
 	}
 }
