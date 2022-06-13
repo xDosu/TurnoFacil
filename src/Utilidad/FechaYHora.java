@@ -47,7 +47,11 @@ public class FechaYHora {
 		return (anio == f.getAnio() && mes == f.getMes() && dia == f.getDia() && hora==f.getHora());
 	}
 	
-	
+	public boolean esMenor(FechaYHora f) {
+		double comparador = this.anio + this.mes/12 + this.dia/(12*31) + this.hora/(12*31*24);
+		
+		return (comparador < f.getAnio() + f.mes/12 + f.dia/(12*31) + f.hora/(12*31*24)); 
+	}
 	
 	
 	

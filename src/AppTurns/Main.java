@@ -1,6 +1,7 @@
 package AppTurns;
 
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 
@@ -43,8 +44,11 @@ public class Main {
 		//Se crearan turnos al azar
 		for (int i=0;i<24;i++) {
 			int selectMed = (int)(Math.random()*(6-1+1)+1);
+			LocalDateTime now = LocalDateTime.now();
+			
 			int randH = (int)(Math.random()*(16-8+1)+8);
-			int randD = 14;//(int)(Math.random()*(31-1+1)+1);
+			int diaPiso = now.getDayOfMonth();
+			int randD = (int)(Math.random()*(31-diaPiso+1)+diaPiso);
 			switch(selectMed) {
 			//randD = 13; //si se quiere dejar fijo
 			case 1 : medico1.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico1));
