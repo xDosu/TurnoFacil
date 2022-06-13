@@ -33,10 +33,8 @@ public class Turn {
 	
 	public boolean expire() {
 		LocalDateTime now = LocalDateTime.now();
-		if(this.getDate().getHora() >= now.getHour() && this.getDate().getDia() >= now.getDayOfMonth() && this.getDate().getMes() >= now.getMonthValue() && this.getDate().getAnio() >= now.getYear()) {
-			return false;
-		}
-		else
-			return true;
-		}
+		FechaYHora f = new FechaYHora(now.getYear(),now.getMonthValue(),now.getDayOfMonth(),now.getHour());
+		return this.date.esMenor(f);
+
+	}
 }
