@@ -2,7 +2,7 @@ package Filters;
 
 import Users.Medic;
 
-public class FilterMedicSurname implements Filter{
+public class FilterMedicSurname implements FilterMedic{
 	private String surname;
 	
 

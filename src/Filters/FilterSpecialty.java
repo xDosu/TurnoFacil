@@ -2,7 +2,7 @@ package Filters;
 
 import Users.*;
 
-public class FilterSpecialty implements Filter{
+public class FilterSpecialty implements FilterMedic{
 	private String specialty;
 	
 	public FilterSpecialty(String specialty) {

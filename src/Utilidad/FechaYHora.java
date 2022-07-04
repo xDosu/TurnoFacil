@@ -1,6 +1,12 @@
 package Utilidad;
-
-public class FechaYHora {
+/*
+ * Clase a cargo de 
+ * 
+ * @author Matias Sorenson
+ * 
+ * @date 10/06/2022
+ */
+public class FechaYHora implements Comparable<FechaYHora>{
 	private int anio;
 	private int mes;
 	private int dia;
@@ -38,41 +44,42 @@ public class FechaYHora {
 
 	}
 
+	@Override
 	public String toString() {
-		return"(" + anio +"/" + mes + "/" + dia + ") a las " + hora;
+		return "(" + anio + "/" + mes + "/" + dia + ") a las " + hora;
 	}
-	
 	
 	public boolean equals(FechaYHora f) {
 		return (anio == f.getAnio() && mes == f.getMes() && dia == f.getDia() && hora==f.getHora());
 	}
 	
-	public boolean esMenor(FechaYHora f) {
+	public int compareTo(FechaYHora f) {
 		double anio1 = this.anio;
 		double mes1 = this.mes;
 		double dia1 = this.dia;
 		double hora1= this.hora;
-		double comparador = anio1 + mes1/12 + dia1/(12*31) + hora1/(12*31*24);
+		double comparador = anio1 + mes1/13 + dia1/(12*32) + hora1/(12*31*25);
 		
 		double anio2 = f.getAnio();
-		double mes2 = f.getMes();
-		double dia2 = f.getDia();
-		double hora2= f.getHora();
-		double comparador2 = anio2+ mes2/12 + dia2/(12*31) + hora2/(12*31*24);
+		double mes2 =  f.getMes();
+		double dia2 =  f.getDia();
+		double hora2=  f.getHora();
+		double comparador2 = anio2+ mes2/13 + dia2/(12*32) + hora2/(12*31*25);
 		
-		
-		System.out.println(comparador);
-		System.out.println(comparador2);
-		System.out.println("CualEsMenor");
-		return (comparador < comparador2); 
+		double aux = comparador - comparador2;
+		if (aux > 0) {
+			return 1;
+		}
+		else {
+			if (aux == 0) {
+				return 0;
+			}
+			else {
+				return -1;
+			}
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public int getAnio() {
 		return anio;
 	}
@@ -104,7 +111,4 @@ public class FechaYHora {
 	public void setHora(int hora) {
 		this.hora = hora;
 	}
-	
-	
-	
 }
