@@ -1,5 +1,15 @@
 package Users;
 
+/*
+ * Clase a cargo de:
+ * 
+ * @author Francisco Aristegui
+ * 
+ * @date 24/05/2022
+ * 
+ *
+ */
+
 public class Admin extends User{
 
 	public Admin(String user, String password) {super(user, password);}

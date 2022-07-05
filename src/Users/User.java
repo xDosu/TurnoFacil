@@ -1,5 +1,13 @@
 package Users;
 
+/*
+ * Clase a cargo de:
+ * 
+ * @author Alan Beguiristain y Matias Sorenson
+ * 
+ * @date 28/06/2022
+ */
+
 public abstract class User {
 	private String user;
 	private String password;

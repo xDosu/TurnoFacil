@@ -1,5 +1,15 @@
 package Users;
 
+/*
+ * Clase a cargo de:
+ * 
+ * @author Esteban Boroni y Alan Beguiristain
+ * 
+ * @date 18/06/2022
+ * 
+ */
+
+
 import java.util.Scanner;
 
 import AppTurns.Turn;
@@ -33,8 +43,6 @@ public class Patient extends UserWithTurns{
 		System.out.println("Ingrese Su nroAfiliado");
 		this.setNroAfiliado(reader.next());
 	}
-	
-	
 	
 	public String getNombre() {
 		return nombre;
@@ -89,43 +97,19 @@ public class Patient extends UserWithTurns{
 		this.nombre = null;
 	}
 	
-	/*
-	Este metodo asigna un paciente a un turno para poder ocuparlo.
-	Luego lo anade a su lista de turnos personales.
-	@author Tomas Fernandez
-	@date 23/05/2022
-	@params Turn : Recibe un turno como parametro
-	*/
+	
 	public void requestTurn(Turn turn) {
 		if(turn.isFree()) {
 			turn.asingPatient(this);
 			super.addTurn(turn);
 		}
 	}
-	
-	/*
-	Este metodo cancela el turno de un paciente.
-	Lo elimina de su lista de turnos, para por ultimo devolverlo para actualizarlo en el objecto 'Clinic'.
-	@author Tomas Fernandez
-	@date 23/05/2022
-	@params Turn : Recibe un turno como parametro
-	*/
-	
-	public void cancelTurn(Turn turn) {
-		if(turn != null) {
-			turn.erasePatient();
-			this.removeTurn(turn);
-		}
-	}
-		
+			
 	@Override
 	public String toString() {
 		return "";
 	}
 
-	
-	
-	
 	@Override
 	public void printMenu() {
 		System.out.println( "Menu Clinica		User : " + this.getUser() + "\n" +
