@@ -10,10 +10,8 @@ import Users.*;
 import Utilidad.FechaYHora;
 
 public class Main {
-
-	public static void main(String[] args) {
-		/* Creacion Clinicla */
-		Clinic clinica = new Clinic(new Admin("juan","sat"));
+	
+	public static void initClinic(Clinic clinica) {
 		/* Creacion Pacientes */
 		Patient paciente1 = new Patient("dosu","123");
 		Patient paciente2 = new Patient("mat","456");
@@ -40,8 +38,18 @@ public class Main {
 		clinica.addUser(medico5);
 		clinica.addUser(medico6);
 		
+		/* Creacion Secretaria */
+		Secretary secretaria = new Secretary("lucia","123");
+		
+		secretaria.addMedic(medico1);
+		secretaria.addMedic(medico3);
+		secretaria.addMedic(medico6);
+		
+		clinica.addUser(secretaria);
+		
 		/* Creacion Turnos */
 		//Se crearan turnos al azar
+		
 		for (int i=0;i<24;i++) {
 			int selectMed = (int)(Math.random()*(6-1+1)+1);
 			LocalDateTime now = LocalDateTime.now();
@@ -49,34 +57,45 @@ public class Main {
 			int randH = (int)(Math.random()*(16-8+1)+8);
 			int diaPiso = now.getDayOfMonth();
 			int randD = (int)(Math.random()*(31-diaPiso+1)+diaPiso);
+			
 			switch(selectMed) {
 			//randD = 13; //si se quiere dejar fijo
-			case 1 : medico1.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico1));
+			case 1 : medico1.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico1));
 				break;
-			case 2 : medico2.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico2));
+			case 2 : medico2.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico2));
 				break;
-			case 3 : medico3.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico3));
+			case 3 : medico3.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico3));
 				break;
-			case 4 : medico4.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico4));
+			case 4 : medico4.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico4));
 				break;
-			case 5 : medico5.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico5));
+			case 5 : medico5.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico5));
 				break;
-			case 6 : medico6.addTurn(new Turn(new FechaYHora(2022,06,randD,randH),medico6));
+			case 6 : medico6.addTurn(new Turn(new FechaYHora(2022,07,randD,randH),medico6));
 				break;
 			}
 		}	
-		/* Login */
+	}
+	
+	public static void login(Clinic clinica) {
 		Scanner reader = new Scanner(System.in);
 		String user;
 		String pass;
-		System.out.println("LOGIN Clinica :");
-		System.out.println("Usuario : ");
-		user = reader.next();
-		System.out.println("Contrasenia : ");
-		pass = reader.next();
-		clinica.login(user, pass);
-		
-		/* Debug */
-		reader.close();
+		int aux = -1;
+		while(aux != 0) {
+			System.out.println("LOGIN Clinica :");
+			System.out.println("Usuario : ");
+			user = reader.next();
+			System.out.println("Contrasenia : ");
+			pass = reader.next();
+			clinica.login(user, pass);
+			System.out.println("Si quiere cerrar la app de login ingrese 0 : ");
+			aux = reader.nextInt();
+		}
+	}
+	
+	public static void main(String[] args) {
+		Clinic clinica = new Clinic(new Admin("juan","sat"));
+		initClinic(clinica);
+		login(clinica);
 	}
 }
